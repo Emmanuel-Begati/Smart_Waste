@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management System - Register</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <section class="form-container">
+        <form action="{{ url_for('register') }}" method="post">
+            <h3>Create an account!</h3>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Name -->
+            <input type="text" name="name" required maxlength="50" placeholder="Enter Your Name" class="box">
+            {% if errors and 'name' in errors %}
+                <p class="error">{{ errors['name'][0] }}</p>
+            {% endif %}
+
+            <!-- Email -->
+            <input type="email" name="email" required maxlength="50" placeholder="Enter Your Email" class="box">
+            {% if errors and 'email' in errors %}
+                <p class="error">{{ errors['email'][0] }}</p>
+            {% endif %}
+
+            <!-- Password -->
+            <input type="password" name="password" required maxlength="20" placeholder="Enter Your Password" class="box">
+            {% if errors and 'password' in errors %}
+                <p class="error">{{ errors['password'][0] }}</p>
+            {% endif %}
+
+            <!-- Confirm Password -->
+            <input type="password" name="confirm_password" required maxlength="20" placeholder="Confirm Your Password" class="box">
+            {% if errors and 'confirm_password' in errors %}
+                <p class="error">{{ errors['confirm_password'][0] }}</p>
+            {% endif %}
+
+            <!-- Register Button -->
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </section>
+</body>
+</html>

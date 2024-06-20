@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management System</title>
+
+    <!-- swiper cdn link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- header section starts      -->
+<header>
+    <a href="#" class="logo"><i class="fas fa-trash"></i>SmartWaste</a>
+    <nav class="navbar">
+        <a class="active" href="#home">Home</a>
+        <a href="#about">Service</a>
+        <a href="{{ url_for('schedules') }}">schedules</a>
+        <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+        {% if 'username' in session %}
+            <!-- <span class="welcome-text">Welcome, {{ session['username'] }}</span> -->
+        {% endif %}
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <a href="#" class="fas fa-shopping-cart"></a>
+    </nav>
+</header>
+
+<!-- header section ends-->
+
+<!-- search form  -->
+<form action="" id="search-form">
+    <input type="search" placeholder="search here..." name="" id="search-box">
+    <label for="search-box" class="fas fa-search"></label>
+    <i class="fas fa-times" id="close"></i>
+</form>
+
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="swiper-container home-slider">
+
+        <div class="swiper-wrapper wrapper">
+
+            <div class="swiper-slide slide">
+                {% if 'username' in session %}
+                    <div class="content">
+                        <h3>Smart Waste Management System</h3>
+                        <p>WELCOME!</p>
+                        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="content">
+                        <h3>Smart Waste Management System</h3>
+                        <p>WELCOME!</p>
+                        <a href="{{ url_for('login') }}" class="btn">Login</a>
+                        <a href="{{ url_for('register') }}" class="btn">Register</a>
+                    </div>
+                {% endif %}
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/SmartWaste1.avif') }}" alt="">
+                </div>
+            </div>
+            
+  
+            </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<section class="homeintro" id="homeintro">
+
+    <h1 class="heading">We offer a user-friendly system with features with three distinct user groups</h1>
+
+    <div class="box-container">
+
+        <div class="box">
+
+            <h3>Waste Collection Services</h3>
+                 <h1>Real-time bin level monitoring: Optimize collection routes by focusing 
+                    on bins that need emptying.<br><br>
+                    Efficient route planning: Reduce fuel consumption and operational costs 
+                    with data-driven route optimization.<br><br>
+                    Improved communication: Streamline communication with residents regarding
+                     service updates and special collection events.
+                    </h1>   
+        
+        </div>
+
+    <div class="box">
+
+        <h3>Household Users</h3>
+        <h1>
+            Schedule waste collection: Easily set reminders and manage your bin pickup schedule, monitor your 
+            recycling habits and see the positive environmental impact.<br><br>
+            View environmental impact metrics: Learn how your waste management choices contribute to a greener 
+            future.<br><br>
+            Educational resources: Access valuable information on waste reduction, 
+            recycling best practices, and composting techniques.
+</h1>
+    </div>
+        
+    <div class="box">
+
+        <h3>For Administrators</h3>
+        <h1> System monitoring: Gain insights into overall waste management effectiveness
+             and identify areas for improvement.<br><br>
+             Data analysis: Track trends in waste generation and recycling rates to inform
+              policy decisions.<br><br>
+             Resource management: Optimize resource allocation based on
+              real-time data on waste collection needs.
+</h1>
+    </div>
+        
+</section>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="sub-heading"> About Us </h1>
+    <h3 class="heading"> why choose us? </h3>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="{{ url_for('static', filename='images/SmartWaste2.jpg') }}" alt="">
+        </div>
+
+        <div class="content">
+            <p>At Smart Waste Management System, we are dedicated to promoting sustainability and 
+                environmental responsibility through innovative waste management solutions. 
+                Our platform empowers users to efficiently manage their waste, track recycling 
+                efforts, and understand their environmental impact. Join us in our mission to create 
+                a cleaner, greener planet for future generations.</p>
+
+            <div class="icons-container">
+                <div class="icons">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 service</span>
+                </div>
+            </div>
+            <a href="#" class="btn">learn more</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- menu section starts  -->
+
+<section class="serviceintro" id="serviceintro">
+
+    <h3 class="sub-heading"> Our Services </h3>
+    <h1 class="heading"> Services deliver by the company </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/Smartwaste3.jpeg') }}" alt="">
+                <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>Waste Collection Schedule Management</h3>
+                <p>Easily view and manage your waste collection schedules.<br><br> 
+                    Receive real-time notifications and reminders about collection days.<br><br>
+                    Request changes to your collection schedule if needed.
+                </p>
+         
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+            <img src="{{ url_for('static', filename='images/Smartwaste4.png') }}" alt="">
+            <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Recycling Effort Tracking</h3>
+            <p> Monitor your recycling activities with detailed tracking.<br><br>
+                Receive personalized tips on how to improve your recycling habits.<br><br>
+                Access monthly reports on your recycling efforts and progress.                    
+            </p>
+              
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+            <img src="{{ url_for('static', filename='images/Smartwaste5.png') }}" alt="">
+            <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Environmental Impact Metrics</h3>
+            <p>Access comprehensive reports on your environmental impact.<br><br>
+                Track metrics such as waste reduction, recycling rates, and carbon footprint.<br><br>
+                Receive actionable insights and recommendations to reduce your environmental impact.
+                
+            </p>
+            
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+            <img src="{{ url_for('static', filename='images/Smartwaste6.webp') }}" alt="">
+            <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Bulk Waste Management</h3>
+            <p>Offer solutions for managing bulk waste from large events or cleanouts.<br><br>
+                Schedule special collections for bulky items and hazardous waste.<br><br>
+                Ensure proper disposal and recycling of large or unusual waste items.                    
+            </p>
+            
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="image">
+            <img src="{{ url_for('static', filename='images/Smartwaste7.webp') }}" alt="">
+            <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Resource Marketplace</h3>
+            <p>Connect users with local recycling centers and waste management services.<br><br>
+                Offer a marketplace for buying and selling recyclable materials.<br><br>
+                Facilitate the exchange of resources to support a circular economy.                    
+            </p>
+            
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+            <img src="{{ url_for('static', filename='images/Smartwaste8.png') }}" alt="">
+            <a href="#" class="fas fa-heart"></a>
+            </div>
+            <div class="content">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Waste Sorting Guidance</h3>
+            <p>Access detailed guides on how to sort different types of waste.<br><br>
+                Use our app to scan items and get sorting instructions.<br><br>
+                Reduce contamination and improve recycling efficiency with proper sorting.
+                
+            </p>
+            
+            </div>
+        </div>
+
+</section>
+
+<!-- menu section ends -->
+
+<!-- review section starts  -->
+
+<section class="review" id="review">
+
+    <h3 class="sub-heading"> customer's review </h3>
+    <h1 class="heading"> what they say </h1>
+
+    <div class="swiper-container review-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{{ url_for('static', filename='images/ID photo.jpg') }}" alt="">
+                    <div class="user-info">
+                        <h3>Ajang C. A. Deng</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>The Smart Waste Management System has made managing our waste so much easier. 
+                    We love the recycling tips and environmental impact metrics!. Keep doing the great job!</p>
+
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{{ url_for('static', filename= 'images/442398157_796727222553982_1116680115716803265_n.jpg') }}" alt="">
+                    <div class="user-info">
+                        <h3>JOK ISREAL CHOL</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Switching to the Smart Waste Management System has been one of the best decisions for our household.
+                     It's intuitive, efficient, and has made a noticeable difference in how we manage waste.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{{ url_for('static', filename='images/KurMalual.jpg') }}" alt="">
+                    <div class="user-info">
+                        <h3>Kur Malual M.</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>The Smart Waste Management System has set a new standard for waste collection and recycling services. 
+                    The efficiency and innovation it brings to the table are commendable.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{{ url_for('static', filename='images/KuirJauch.jpg') }}" alt="">
+                    <div class="user-info">
+                        <h3>Kuir Juach Kuir</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>I love how the system provides detailed environmental impact metrics. 
+                    It's motivating to see the positive effects of our recycling efforts, 
+                    and it encourages our family to do even more for the planet</p>
+            </div>
+    
+</section>
+
+
+<!-- special attention section starts  -->
+
+<section class="attentionintro" id="attentionintro">
+
+    <h3 class="sub-heading"> Special Attention to our Customer  </h3>
+    <h1 class="heading"> Leave your urgent issue below as soon as possible. </h1>
+
+    <form action="">
+
+        <div class="inputBox">
+            <div class="input">
+                <span>your name</span>
+                <input type="text" placeholder="enter your name">
+            </div>
+            <div class="input">
+                <span>your number</span>
+                <input type="text" placeholder="enter your number">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>Email address</span>
+                <input type="text" placeholder="enter your email">
+            </div>
+            
+            <div class="input">
+                <span>date and time</span>
+                <input type="datetime-local">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>your address</span>
+                <textarea name="" placeholder="enter your address" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="input">
+                <span>your message</span>
+                <textarea name="" placeholder="enter your message" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+
+        <input type="submit" value="submit" class="btn">
+
+    </form>
+
+</section>
+
+<!-- special attention section ends -->
+
+<!-- footer section starts  -->
+
+
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>locations</h3>
+            <a href="#">Rwanda</a>
+            <a href="#">South Sudan</a>
+            <a href="#">Kenya</a>
+            <a href="#">Nigeria</a>
+            <a href="#">Tanzania</a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">services</a>
+            <a href="#">about us</a>
+            <a href="#">contact</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#">+21192851806</a>
+            <a href="#">smartwaste@gmail.com</a>
+            <a href="#">smartwastemanagementsys@gmail.com</a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#">facebook</a>
+            <a href="#">twitter</a>
+            <a href="#">instagram</a>
+            <a href="#">linkedin</a>
+        </div>
+
+    </div>
+
+    <div class="credit"> copyright @ 2024 by <span>Smart Waste Management</span> </div>
+
+</section>
+
+
+
+<!-- footer section ends -->
+
+<!-- loader part  -->
+<div class="loader-container">
+    <img src="{{ url_for('static', filename='Animation - 1717896606774.gif') }}" alt="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+

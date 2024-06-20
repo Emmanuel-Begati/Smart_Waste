@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule Management - Admin Dashboard</title>
+      <!-- swiper cdn link  -->
+      <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+      <!-- font awesome cdn link  -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #e0e3ec;
+      color: #4caf50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .navbar a {
+       color: #4caf50;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+    }
+
+    .navbar a:hover, .navbar .active {
+      background-color: #2563EB;
+      border-radius: 5px;
+    }
+
+    .sidebar {
+      background-color: #2563EB;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      transform: translateX(-250px);
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem;
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #1E3A8A;
+      border-radius: 5px;
+    }
+
+    input:checked + .sidebar {
+      transform: translateX(0);
+    }
+
+    main {
+      margin-left: 260px;
+      padding: 2rem;
+      transition: margin-left 0.3s ease;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h1 {
+      margin: 0;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      gap: 0.5rem;
+      color: #1E3A8A;
+    }
+
+    .breadcrumbs a {
+      text-decoration: none;
+      color: #1E3A8A;
+    }
+
+    .breadcrumbs i {
+      color: #6B7280;
+    }
+
+    .schedule-list, .schedule-form {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+
+    .schedule-list table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .schedule-list th, .schedule-list td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .schedule-list th {
+      text-align: left;
+      background-color: #f0f4f8;
+    }
+
+    .schedule-list tbody tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .schedule-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .schedule-form label {
+      font-weight: bold;
+    }
+
+    .schedule-form select, .schedule-form input {
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+    }
+
+    .schedule-form button {
+      background-color: #1E3A8A;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .schedule-form button:hover {
+      background-color: #2563EB;
+    }
+
+    .sidebar-toggle {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-250px);
+      }
+
+      input:checked + .sidebar {
+        transform: translateX(0);
+      }
+
+      main {
+        margin-left: 0;
+      }
+
+      .navbar {
+        display: none;
+      }
+
+      .sidebar-toggle {
+        display: block;
+        background-color: #1E3A8A;
+        color: white;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Sidebar Toggle Button -->
+<label for="sidebar-toggle" class="sidebar-toggle">Menu</label>
+
+<header>
+  <div class="logo"><i class="fas fa-trash"></i>SmartWaste</div>
+  <nav class="navbar">
+    <a  href="#home">Home</a>
+    <a href="#about">Service</a>
+    <a class= "active" href="scheduler.html">Scheduler</a>
+    <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+  </nav>
+</header>
+
+
+<!-- Main Content -->
+<main>
+  <div class="section-header">
+    <h1>Schedule Management</h1>
+   
+  </div>
+
+  <section class="grid-container">
+    <!-- Schedule List Section -->
+    <div class="schedule-list">
+      <h3>Schedule List</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>Joy fofonaa</p>
+              <p>Chinedu okwa</p>
+              <p>Ding Garang</p>
+              <p>Micheal Jones</p>
+            
+              <p>Grad Tom</p>
+            </td>
+            <td>Monday, June 16</td>
+            <td>Kigali</td>
+            
+            <td>
+              <span style="background-color: #34D399; color: white; padding: 0.25rem 0.5rem; border-radius: 5px;">Collected</span>
+            </td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Schedule Form Section -->
+    <div class="schedule-form">
+      <h3>Add New Schedule</h3>
+      <form>
+        <div>
+          <label for="user">User</label>
+          <select id="user" name="user">
+            <option style="font-size: larger;">Joy fofonaa</option>
+            <option style="font-size: larger;">Chinedu okwa</option>
+            <option style="font-size: larger;">Ding Garang</option>
+            <option style="font-size: larger;">Micheal Jones</option>
+            <option style="font-size: larger;">Grad Tom</option>
+            <!-- Add more users as needed -->
+          </select>
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location">
+        </div>
+        <div>
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option>Pending</option>
+            <option>Collected</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit">Add Schedule</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>locations</h3>
+            <a href="#">Rwanda</a>
+            <a href="#">South Sudan</a>
+            <a href="#">Kenya</a>
+            <a href="#">Nigeria</a>
+            <a href="#">Tanzania</a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">services</a>
+            <a href="#">about us</a>
+            <a href="#">contact</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#">+21192851806</a>
+            <a href="#">smartwaste@gmail.com</a>
+            <a href="#">smartwastemanagementsys@gmail.com</a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#">facebook</a>
+            <a href="#">twitter</a>
+            <a href="#">instagram</a>
+            <a href="#">linkedin</a>
+        </div>
+
+    </div>
+
+    <div class="credit"> copyright @ 2024 by <span>Smart Waste Management</span> </div>
+
+</section>
+</body>
+</html>
+

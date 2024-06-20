@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management System - Login</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <section class="form-container">
+        <form action="{{ url_for('login') }}" method="post">
+            <h3>Log in to your account!</h3>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Email -->
+            <input type="email" name="email" required maxlength="50" placeholder="Enter Your Email" class="box">
+
+            <!-- Password -->
+            <input type="password" name="password" required maxlength="20" placeholder="Enter Your Password" class="box">
+
+            <!-- Login Button -->
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </section>
+</body>
+</html>
